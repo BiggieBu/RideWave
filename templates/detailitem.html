@@ -1,0 +1,52 @@
+<div class="border-bottom row" style="margin-bottom:16px;padding-bottom:8px;padding-left:100px">
+  <div class="col-10">
+    <h4 
+      style="color:rgb(120,120,120); margin-bottom:4px;">
+      {{details['detailsid']}}
+    </h4>
+    <div>
+      <b>leaving date:</b> {{details['leavedate']}}
+      <b>leaving time:</b> {{details['leavingtime']}}
+    </div>
+    <div>
+      <b>car name:</b> {{details['carName']}}
+    </div>
+    <div>
+      <b>car no. :</b> {{details['carNo']}}
+    </div>
+    <div>
+      <b>cost:</b> {{details['cost']}}
+    </div>
+    <div>
+      <b>Initial Location:</b> 
+      <div>
+        <b>latitude:</b>{{details['initiallocationx']}}
+      </div>
+      <div>        
+      <b>longitude:</b> {{details['initiallocationy']}}
+      </div>  
+    </div>
+    <div>
+      <b>Final Location:</b> 
+      <div>
+        <b>latitude:</b>{{details['finallocationx']}}
+      </div>
+      <div>
+        <b>longitude:</b> {{details['finallocationy']}}
+      </div>
+    </div>
+    <div>
+      <b>no. of passengers:</b> {{details['noofpassengers']}}
+      <div>
+      <b>passengers:</b>
+      <div>
+      {%for row in passengers%}
+          <div>
+            {{row['username']}}
+          </div>
+      {%endfor%}
+      </div>   
+      </div>
+    </div>
+  </div>
+</div>

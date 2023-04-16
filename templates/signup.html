@@ -187,7 +187,7 @@ body {
 <div class="container">
 	<div class="screen">
 		<div class="screen__content">
-			<form class="signup" action="/users/apply" method='post'>
+			<form class="signup" action="/signup" method='post'>
         <div class="signup__field">
 					<i class="signup__icon fas fa-user"></i>
 					<input type="text" name="fname" class="signup__input" placeholder="First Name">
@@ -216,7 +216,17 @@ body {
 					<span class="button__text">SIGN UP</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>				
+        
 			</form>
+      {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 		</div>
 		<div class="screen__background">
 			<span class="screen__background__shape screen__background__shape4"></span>

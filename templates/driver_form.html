@@ -23,7 +23,7 @@ body {
 .screen {		
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
-	height: 600px;
+	height: 1000px;
 	width: 360px;	
 	box-shadow: 0px 0px 24px #5C5696;
 }
@@ -139,6 +139,10 @@ body {
 	transition: .2s;
 }
 
+::placeholder{
+  color:black
+}
+
 .login__submit:active,
 .login__submit:focus,
 .login__submit:hover {
@@ -184,21 +188,53 @@ body {
 <div class="container">
   <div class="screen">
     <div class="screen__content">
-      <form class="login" action="/login" method="post">
+      <form class="login" action="/user/{{username}}/driver_form" method="post">
         <div class="login__field">
           <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="username" placeholder="User name">
+          <input type="text" class="login__input" name="initx" placeholder="current latitude">
         </div>
         <div class="login__field">
-          <i class="login__icon fas fa-lock"></i>
-          <input type="password" class="login__input" name="password" placeholder="Password">
+          <i class="login__icon fas fa-user"></i>
+          <input type="text" class="login__input" name="inity" placeholder="current longitude">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="number" class="login__input" name="cost" placeholder="charge per km">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="number" class="login__input" name="seats" placeholder="Available seats">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="text" class="login__input" name="carno" placeholder="Car Number">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="text" class="login__input" name="carname" placeholder="Car Name">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="datetime" class="login__input" name="leavetime" placeholder="Leaving Time">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="date" class="login__input" name="leavedate" placeholder="Date">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="text" class="login__input" name="finalx" placeholder="Destination latitude">
+        </div>
+        <div class="login__field">
+          <i class="login__icon fas fa-user"></i>
+          <input type="text" class="login__input" name="finaly" placeholder="Destination longitude">
         </div>
         <button class="button login__submit">
-          <span class="button__text">Log In Now</span>
+          <span class="button__text">PUBLISH</span>
           <i class="button__icon fas fa-chevron-right"></i>
         </button>
       </form>
-      <a href="signup" style="padding-left:10px">sign up</a>
+      
       {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
       <ul class="flashes">
