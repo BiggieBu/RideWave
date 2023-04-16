@@ -1,6 +1,6 @@
 from sqlalchemy import  create_engine,text
 
-db_conn_str = "mysql+pymysql://pzzz55wxbxerfsaqc60q:pscale_pw_fMbvXDrFA3mzsPnOwKKRPmrwUVXfpWGnCp22d4cUgRC@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
+db_conn_str = "mysql+pymysql://617onh5prl2dg7bx8zmk:pscale_pw_M3XjrIaych0xj9g1Asob8s7LkVXSKqFuYtlET238843@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
 
 engine = create_engine(db_conn_str, connect_args={
   "ssl":{
@@ -22,9 +22,11 @@ def login(name, pword):
         result = conn.execute(text("SELECT username, password FROM Users WHERE username = :val"), {"val": name})
         d = row_to_dict(result, 0)
         if not d:
-            print("Username not found")
+            return("Username not found")
         elif d['password'] == pword:
-            print("Welcome")
+            return("Welcome")
         else:
-            print("Wrong password")
+            return("Wrong password")
+
+login('Parv','suparv')
 
