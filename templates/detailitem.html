@@ -1,48 +1,51 @@
 <div class="border-bottom row" style="margin-bottom:16px;padding-bottom:8px;padding-left:100px">
-  <div class="col-10">
-    <h4 
+  <div class="col-10" style="border:5px solid black;border-radius:10px; padding:20px; overflow:hidden; margin:10px;width:90%" >
+    <h2 
       style="color:rgb(120,120,120); margin-bottom:4px;">
       {{details['adminusername']}}
-    </h4>
+    </h2><br><br>
     <div>
-      <b>leaving date:</b> {{details['leavedate']}}
-      <b>leaving time:</b> {{details['leavingtime']}}
+      <b style="font-size:15px">Leaving Date: </b> {{details['leavedate']}}
+      <b style="font-size:15px">Leaving Time: </b> {{details['leavingtime']}}
     </div>
     <div>
-      <b>car name:</b> {{details['carName']}}
+      <b style="font-size:15px">Car Name : </b> {{details['carName']}}
     </div>
     <div>
-      <b>car no. :</b> {{details['carNo']}}
+      <b style="font-size:15px">Car No. : </b> {{details['carNo']}}
     </div>
     <div>
-      <b>cost:</b> {{details['cost']}}
+      <b style="font-size:15px">Cost : </b> {{details['cost']}}
     </div>
     <div>
-      <b>Initial Location:</b> 
+      <b style="font-size:15px">INITIAL LOCATION</b> 
       <div>
-        <b>latitude:</b>{{details['initiallocationx']}}
+        <b style="font-size:15px">    Latitude : </b> {{details['initiallocationx']}}
       </div>
       <div>        
-      <b>longitude:</b> {{details['initiallocationy']}}
+      <b style="font-size:15px">    Longitude : </b> {{details['initiallocationy']}}
       </div>  
     </div>
     <div>
-      <b>Final Location:</b> 
+      <b style="font-size:15px">FINAL LOCATION</b> 
       <div>
-        <b>latitude:</b>{{details['finallocationx']}}
+        <b style="font-size:15px">    Latitude : </b> {{details['finallocationx']}}
       </div>
       <div>
-        <b>longitude:</b> {{details['finallocationy']}}
+        <b style="font-size:15px">    Longitude : </b> {{details['finallocationy']}}
       </div>
     </div>
     <div>
-      <b>no. of passengers:</b> {{details['noofpassengers']}}
+      <b style="font-size:15px">No. of Passengers : </b> {{details['noofpassengers']}}
       <div>
-      <b>passengers:</b>
+      <b style="font-size:15px">Passengers:</b>
       <div>
       {%for row in passengers%}
           <div>
             {{row['username']}}
+            {% if username == details['adminusername'] %}
+            <a style="color:white;background-color:orangered; border-radius:5px;padding-left:5px;padding-right:5px;padding-top:3px;padding-bottom:4px;margin:5px" href="/user/{{username}}/clusters/{{clusters}}/remove/{{row['username']}}">Remove</a>
+    {% endif %}
           </div>
       {%endfor%}
       </div>   

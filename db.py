@@ -1,7 +1,7 @@
 from sqlalchemy import  create_engine,text
-#Username:	offs8hy34z125lj7qdtq
-#Password:	pscale_pw_cZRayFtfwM2mJsBlsDEy1Pj06u0ysn0mbhIkOxLYxpH
-db_conn_str = "mysql+pymysql://offs8hy34z125lj7qdtq:pscale_pw_cZRayFtfwM2mJsBlsDEy1Pj06u0ysn0mbhIkOxLYxpH@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
+#Username:	ghrhb817uqfercpzm23r
+#Password:	pscale_pw_IQYqDWAx4FAVvFvB0JJIHumocmauEYj0qdwZvZoN9tb
+db_conn_str = "mysql+pymysql://ghrhb817uqfercpzm23r:pscale_pw_IQYqDWAx4FAVvFvB0JJIHumocmauEYj0qdwZvZoN9tb@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
 
 engine = create_engine(db_conn_str, connect_args={
   "ssl":{
@@ -111,11 +111,16 @@ def requestaccepted(id,what):
 def requestinsert(admin,cid,id,lat,lng):
   try:
         with engine.connect() as conn:
-           conn.execute(
+          result1 = conn.execute(text("SELECT username FROM Users where username=:val and clusterid=:cid"), {"val": id,"cid":cid})
+          r=row_to_dict(result1)
+          if(len(r)>0):
+            return '0'
+          else:
+            conn.execute(
                text("insert into Requests(`username`, `adminusername`, `clusterid`, `latitude`, `longitude`)values(:x,:y,:z,:a,:b)"),
               {"x": id, "y": admin, "z": cid, "a": lat, "b": lng}
            )
-        return "Success"
+            return "Success"
   except Exception as e:
         return str(e)
 def loadstatus(id):
@@ -131,4 +136,7 @@ def loadcluster_part(id):
   with engine.connect() as conn:
     result = conn.execute(text("SELECT c.* FROM Cluster c inner join Users u on c.clusterid=u.clusterid and u.username=:val"), {"val": id})
     return rows_to_list_of_dicts(result)
-
+def removemember(cid,mid):
+  with engine.connect() as conn:
+    conn.execute(text("Update Users set clusterid=NULL where username=:mid"),{"mid":mid})
+    conn.execute(text("Update Cluster set noofpassengers=noofpassengers-1 where clusterid=:cid"),{"cid":cid})
