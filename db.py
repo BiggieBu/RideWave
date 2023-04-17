@@ -140,3 +140,4 @@ def removemember(cid,mid):
   with engine.connect() as conn:
     conn.execute(text("Update Users set clusterid=NULL where username=:mid"),{"mid":mid})
     conn.execute(text("Update Cluster set noofpassengers=noofpassengers-1 where clusterid=:cid"),{"cid":cid})
+  return 0

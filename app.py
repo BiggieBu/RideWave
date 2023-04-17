@@ -82,8 +82,8 @@ def details(id,cid):
 @app.route("/user/<id>/clusters/<cid>/remove/<mid>")
 @login_required_for_id
 def remove(id,mid,cid):
-  removemember(cid,mid)
-  redirect('/user/{}/clusters/{}'.format(id,cid))
+  r=removemember(cid,mid)
+  return redirect('/user/{}/clusters/{}'.format(id,cid))
   
 @app.route("/user/<id>/requests")
 @login_required_for_id
