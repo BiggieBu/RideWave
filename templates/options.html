@@ -17,10 +17,15 @@
 .dropbtn {
   background-color: #3A3C6C;
   color: white;
-  padding: 16px;
+  border: 2px;
   font-size: 16px;
   border: none;
   cursor: pointer;
+    border-radius: 50%;
+}
+.dropbtn > img{
+    height: 48px;
+    width: 48px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -197,41 +202,37 @@ header{padding: 10px 0px 0px 0px;}
 <header>
 	<div class="container">
 		<div class="col6">
-			<img src="image/logo.png" class="logo">
-			<div class="input-box">
-				<i class="fa fa-map-marker"></i>
-				<input type="text" placeholder="Tell us your location" />
-				<button class="s-btn">
-					<i class="fa fa-long-arrow-right"></i>
-				</button>
-			</div>
+			<img style="width:75px;height:75px" src="/static/cab.jpg" class="logo">
+       <h2 style="margin:25px">RideWave</h2>
 		</div>
+    
 		<div class="col6">
 			<ul class="topnav">
 		
-				<li><a href="#">Drive</a></li>
-				<li><a href="#">Help</a></li>
-				<li><img src="/static/pfp.jpg" alt="pfp" style="width:30px;height:30px;"></li>
+				
+				
+				
 				<li><div class="dropdown">
-  <button class="dropbtn">{{username}}</button>
+  <button  class="dropbtn"><img src="/static/pfp.jpg" alt="pfp"></button>
   <div class="dropdown-content">
-    <a href="/user/{{username}}/clusters">Your Clusters</a>
-    <a href="/user/{{username}}/requests">Recieved Requests</a>
-    <a href="#">Log Out</a>
+    <a href="">{{username}}</a>
+    <a href="/help">Help</a>
+    <a href="/logout">Log Out</a>
   </div>
 </div></li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
 	</div>
+
 	<div class="header-bottom">
 		<div class="container">
 			<ul class="bottomnav">
-				<li><a href="/user/{{username}}"><i class="fa fa-home"></i>  Home</a></li>
-				<li><a href="#"><i class="fa fa-exclamation-circle"></i>  Your Clusters</a></li>
+				<li class="active"><a href="#"><i class="fa fa-home"></i>  Home</a></li>
+				<li><a href="/user/{{username}}/clusters"><i class="fa fa-exclamation-circle"></i>  Your Clusters</a></li>
 				<li><a href="/user/{{username}}/requests"><i class="fa fa-gear"></i> Recieved Requests</a></li>
 				<li><a href="/user/{{username}}/request_status"><i class="fa fa-taxi"></i>  Request Status</a></li>
-				<li><a href="#"><i class="fa fa-gift"></i>  Packages</a></li>
+
 				<li><a href="#"><i class="fa fa-map-marker"></i>  Contact</a></li>
 			</ul>
 			<button class="b-btn">Become a Driver</button>
