@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	
 	<style>
     :root{
 	--yellow:#EBB14D;
@@ -58,7 +56,12 @@ header{padding: 10px 0px 0px 0px;}
 }
 .taxi-img{width: 100%;}
 .sec-1{ padding: 50px 0px 0px 0px;  height: 280px;
- background: linear-gradient(var(--light), #fff);}
+ background: linear-gradient(var(--light), #fff);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+      }
 .heading{font-size: 50px; color: var(--darkblue);}
 .sec-2{margin-top: 3%; padding: 100px 0px;}
 .heading-2{color: var(--darkblue); text-align: center;}
@@ -141,13 +144,16 @@ header{padding: 10px 0px 0px 0px;}
 .footer-distributed .footer-right a:hover{transform:scale(1.1);}
 .footer-distributed p.footer-links a:hover{text-decoration:underline;}
   </style>
+<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+<title>RideWave</title>
 </head>
 <body>
 
 <header>
 	<div class="container">
 		<div class="col6">
-			<img src="image/logo.png" class="logo">
+			<img style="width:75px;height:75px" src="/static/cab.jpg" class="logo">
+      <div style="margin:25px">RideWave.</div>
 		</div>
 		<div class="col6">
 			<ul class="topnav">
@@ -155,7 +161,7 @@ header{padding: 10px 0px 0px 0px;}
 				<li><a href="https://ridewave.biggiebu.repl.co/login">Drive</a></li>
 				<li><a href="#">Help</a></li>
 				<li><a href="https://ridewave.biggiebu.repl.co/login">Sign in</a></li>
-				<li><button class="btn-r">Ride With carpool</button></li>
+				<li><button class="btn-r" onclick="window.open('http://ridewave.biggiebu.repl.co/login', '_blank')">Ride With carpool</button></li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -180,22 +186,23 @@ header{padding: 10px 0px 0px 0px;}
 <section class="sec-1">
 	<div class="container">
 		<div class="col6">
-			<h1 class="heading">Earn. Connect.<br>Contribute to<br>Socity</h1>
+			<h1 class="heading">Earn. Connect.<br>Contribute to<br>Society</h1>
 			<p>Partner with us to drive your own livelihood and more.</p>
 			<br>
 			<a class="btn-r" href = 'https://ridewave.biggiebu.repl.co/signup'>Sign up Now</a>
 		</div>
 		<div class="col6">
-			<img src="image/taxi.png" class="taxi-img">
+			<img src="/static/zoom.jpg" class="taxi-img">
 		</div>
 		<div class="clearfix"></div>
 	</div>
 </section>
 
 
-<section class="map">
-	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d447986.853145337!2d76.81114849633596!3d28.692718881263545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d047309fff32f%3A0xfc5606ed1b5d46c3!2sDelhi!5e0!3m2!1sen!2sin!4v1646818342543!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-</section>
+<div id="map">
+	<button onclick="getlocation()">Click me</button>
+  
+</div>
 
 <footer class="footer-distributed">
 
@@ -217,7 +224,7 @@ header{padding: 10px 0px 0px 0px;}
 <a href="#">Faq</a>
 <a href="#">Contact</a>
 </p>
-<p>Carpool © 2015</p>
+<p>Ride Wave © 2023</p>
 </div>
 
 </footer>
@@ -231,6 +238,20 @@ header{padding: 10px 0px 0px 0px;}
     $('.bottomnav li').removeClass("active");
     $(this).addClass("active");
 });
+   var x= document.getElementById("map");  
+    function getlocation() {  
+        if(navigator.geolocation){  
+            navigator.geolocation.getCurrentPosition(showPosition)  
+          }  
+        else  
+        {  
+             alert("Sorry! your browser is not supporting")  
+         } }  
+       
+     function showPosition(position){  
+       var x = "Your current location is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " +    position.coords.longitude + ")";  
+                document.getElementById("map").innerHTML = x;  
+     }  
 
 	
 </script>

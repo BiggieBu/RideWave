@@ -1,7 +1,7 @@
 from sqlalchemy import  create_engine,text
-#Username:	ghrhb817uqfercpzm23r
-#Password:	pscale_pw_IQYqDWAx4FAVvFvB0JJIHumocmauEYj0qdwZvZoN9tb
-db_conn_str = "mysql+pymysql://ghrhb817uqfercpzm23r:pscale_pw_IQYqDWAx4FAVvFvB0JJIHumocmauEYj0qdwZvZoN9tb@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
+#Username:	mn6x97u1ik8mrxsig5qk
+#Password:	pscale_pw_isFY3rRKyikPIJXg1jMklSHtWT2qYAo0N3DOcgKW0Sa
+db_conn_str = "mysql+pymysql://mn6x97u1ik8mrxsig5qk:pscale_pw_isFY3rRKyikPIJXg1jMklSHtWT2qYAo0N3DOcgKW0Sa@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
 
 engine = create_engine(db_conn_str, connect_args={
   "ssl":{

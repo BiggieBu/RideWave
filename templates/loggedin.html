@@ -17,10 +17,15 @@
 .dropbtn {
   background-color: #3A3C6C;
   color: white;
-  padding: 16px;
+  border: 2px;
   font-size: 16px;
   border: none;
   cursor: pointer;
+    border-radius: 50%;
+}
+.dropbtn > img{
+    height: 48px;
+    width: 48px;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -198,7 +203,7 @@ header{padding: 10px 0px 0px 0px;}
 	<div class="container">
 		<div class="col6">
 			<img style="width:75px;height:75px" src="/static/cab.jpg" class="logo">
-       <b style="padding-top:px">RideWave.</b>
+       <h2 style="margin:25px">RideWave</h2>
 		</div>
     
 		<div class="col6">
@@ -206,12 +211,12 @@ header{padding: 10px 0px 0px 0px;}
 		
 				
 				
-				<li><img src="/static/pfp.jpg" alt="pfp" style="width:30px;height:30px;"></li>
+				
 				<li><div class="dropdown">
-  <button  class="dropbtn">{{username}}</button>
+  <button  class="dropbtn"><img src="/static/pfp.jpg" alt="pfp"></button>
   <div class="dropdown-content">
-    <a href="/user/{{username}}/clusters">Your Clusters</a>
-    <a href="/user/{{username}}/requests">Recieved Requests</a>
+    <a href="">{{username}}</a>
+    <a href="/help">Help</a>
     <a href="/logout">Log Out</a>
   </div>
 </div></li>
