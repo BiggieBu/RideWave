@@ -1,0 +1,24 @@
+adminusername and clusterid need to have a relation.
+when inserting request ,instead of passing both of them we can do that by just clusterid as a cluster as its unique admin
+do something bout it
+
+instead of deleting request entry add it to accepted request / request history to show it in another tab on request status
+
+login is not safe
+one can just enter url with username and be done with it
+
+add functionality to remove a user from cluster
+
+update detailsitem.html to display map route 
+
+
+update match function using api to show only those options which are practical
+
+
+update recieved request to show:-
+  google map with all locations added including the request
+  how much extra kilometers are added to the ride
+
+add functionality(a new table or in current schema) to store each users payment based on cost/km and price division based on some function
+
+

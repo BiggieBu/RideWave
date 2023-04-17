@@ -216,7 +216,7 @@ header{padding: 10px 0px 0px 0px;}
   <button class="dropbtn">{{username}}</button>
   <div class="dropdown-content">
     <a href="/user/{{username}}/clusters">Your Clusters</a>
-    <a href="#">Your Requests</a>
+    <a href="/user/{{username}}/requests">Recieved Requests</a>
     <a href="#">Log Out</a>
   </div>
 </div></li>
@@ -229,8 +229,8 @@ header{padding: 10px 0px 0px 0px;}
 			<ul class="bottomnav">
 				<li><a href="/user/{{username}}"><i class="fa fa-home"></i>  Home</a></li>
 				<li class="active"><a href="/user/{{username}}/clusters"><i class="fa fa-exclamation-circle"></i>  Your Clusters</a></li>
-				<li><a href="#"><i class="fa fa-gear"></i>  Our Services</a></li>
-				<li><a href="#"><i class="fa fa-taxi"></i>  Our Vechicles</a></li>
+				<li><a href="/user/{{username}}/requests"><i class="fa fa-gear"></i>  Recieved Requests</a></li>
+				<li><a href="/user/{{username}}/request_status"><i class="fa fa-taxi"></i>  Request Status</a></li>
 				<li><a href="#"><i class="fa fa-gift"></i>  Packages</a></li>
 				<li><a href="#"><i class="fa fa-map-marker"></i>  Contact</a></li>
 			</ul>

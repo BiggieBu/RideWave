@@ -1,7 +1,7 @@
 from sqlalchemy import  create_engine,text
-#Username=ldx9p3zooxyyff0jt88o
-#Password=pscale_pw_5zBWA58QAqQucdH9cBoW5dwKzAiD4ZRyyUu1TKbdPaA
-db_conn_str = "mysql+pymysql://ldx9p3zooxyyff0jt88o:pscale_pw_5zBWA58QAqQucdH9cBoW5dwKzAiD4ZRyyUu1TKbdPaA@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
+#Username:	offs8hy34z125lj7qdtq
+#Password:	pscale_pw_cZRayFtfwM2mJsBlsDEy1Pj06u0ysn0mbhIkOxLYxpH
+db_conn_str = "mysql+pymysql://offs8hy34z125lj7qdtq:pscale_pw_cZRayFtfwM2mJsBlsDEy1Pj06u0ysn0mbhIkOxLYxpH@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
 
 engine = create_engine(db_conn_str, connect_args={
   "ssl":{
@@ -58,7 +58,7 @@ def signupinsert(data):
         return "Success"
   except Exception as e:
         return str(e)
-def requestinsert(id,data):
+def clusterinsert(id,data):
   carname= data['carname']
   carno= data['carno']
   cost=data['cost']
@@ -92,3 +92,43 @@ def loadpool(cid):
   with engine.connect() as conn:
     result = conn.execute(text("SELECT * FROM Users where clusterid=:val"), {"val": cid})
     return rows_to_list_of_dicts(result)
+def loadrequests(id):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM Requests where adminusername=:val"), {"val": id})
+    return rows_to_list_of_dicts(result)
+
+def requestaccepted(id,what):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT username,clusterid FROM Requests where requestid=:val"), {"val": id})
+    d=row_to_dict(result)
+    cid=d['clusterid']
+    uname=d['username']
+    if(what=='1'):
+      conn.execute(text("Update Users set clusterid=:cid where username=:uname"),{"cid":cid,"uname":uname})
+      conn.execute(text("Update Cluster set noofpassengers=noofpassengers+1 where clusterid=:cid"),{"cid":cid})
+    conn.execute(text("delete from Requests where requestid=:rid"),{"rid":id})
+  return cid  
+def requestinsert(admin,cid,id,lat,lng):
+  try:
+        with engine.connect() as conn:
+           conn.execute(
+               text("insert into Requests(`username`, `adminusername`, `clusterid`, `latitude`, `longitude`)values(:x,:y,:z,:a,:b)"),
+              {"x": id, "y": admin, "z": cid, "a": lat, "b": lng}
+           )
+        return "Success"
+  except Exception as e:
+        return str(e)
+def loadstatus(id):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM Requests where username=:val"), {"val": id})
+    return rows_to_list_of_dicts(result)
+def match(id,lat,lng):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM Cluster where adminusername<>:admin "),{"admin":id})
+    return rows_to_list_of_dicts(result)
+
+def loadcluster_part(id):
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT c.* FROM Cluster c inner join Users u on c.clusterid=u.clusterid and u.username=:val"), {"val": id})
+    return rows_to_list_of_dicts(result)
+

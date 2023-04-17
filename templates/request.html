@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title></title>
 	
 	<style>
+    
     :root{
 	--yellow:#EBB14D;
 	--darkblue:#3A3C6C;
 	--light:#cfd8ef;
 	--white:#fff;
 }
+.dropbtn {
+  background-color: #3A3C6C;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+    
 *{margin: 0px; padding: 0px; font-family: system-ui;}
 .clearfix{clear: both;}
 header{padding: 10px 0px 0px 0px;}
@@ -158,23 +208,29 @@ header{padding: 10px 0px 0px 0px;}
 		</div>
 		<div class="col6">
 			<ul class="topnav">
-				<li><a href="https://ridewave.biggiebu.repl.co/login">Ride</a></li>
-				<li><a href="https://ridewave.biggiebu.repl.co/login">Drive</a></li>
+		
+				<li><a href="#">Drive</a></li>
 				<li><a href="#">Help</a></li>
-				<li><a href="https://ridewave.biggiebu.repl.co/login">Sign in</a></li>
-				<li><button class="btn-r">Ride With carpool</button></li>
+				<li><img src="/static/pfp.jpg" alt="pfp" style="width:30px;height:30px;"></li>
+				<li><div class="dropdown">
+  <button class="dropbtn">{{username}}</button>
+  <div class="dropdown-content">
+    <a href="/user/{{username}}/clusters">Your Clusters</a>
+    <a href="#">Recieved Requests</a>
+    <a href="#">Log Out</a>
+  </div>
+</div></li>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
 	</div>
-
 	<div class="header-bottom">
 		<div class="container">
 			<ul class="bottomnav">
-				<li class="active"><a href="#"><i class="fa fa-home"></i>  Home</a></li>
-				<li><a href="#"><i class="fa fa-exclamation-circle"></i>  About</a></li>
-				<li><a href="#"><i class="fa fa-gear"></i>  Our Services</a></li>
-				<li><a href="#"><i class="fa fa-taxi"></i>  Our Vechicles</a></li>
+				<li><a href="/user/{{username}}"><i class="fa fa-home"></i>  Home</a></li>
+				<li><a href="/user/{{username}}/clusters"><i class="fa fa-exclamation-circle"></i>  Your Clusters</a></li>
+				<li class="active"><a href="#"><i class="fa fa-gear"></i>Recieved Requests</a></li>
+				<li><a href="/user/{{username}}/requests"><i class="fa fa-taxi"></i>  Request Status</a></li>
 				<li><a href="#"><i class="fa fa-gift"></i>  Packages</a></li>
 				<li><a href="#"><i class="fa fa-map-marker"></i>  Contact</a></li>
 			</ul>
@@ -183,123 +239,15 @@ header{padding: 10px 0px 0px 0px;}
 		</div>
 	</div>
 </header>
+<div>
+        {% for request in requests %}
+          {% include 'requestitem.html' %}
+        {% endfor %}
+  </div>
 
 
-<section class="sec-1">
-	<div class="container">
-		<div class="col6">
-			<h1 class="heading">Earn. Connect.<br>Contribute to<br>Socity</h1>
-			<p>Partner with us to drive your own livelihood and more.</p>
-			<br>
-			<a class="btn-r" href = 'https://ridewave.biggiebu.repl.co/signup'>Sign up Now</a>
-		</div>
-		<div class="col6">
-			<img src="image/taxi.png" class="taxi-img">
-		</div>
-		<div class="clearfix"></div>
-	</div>
-</section>
 
 
-<section class="sec-2">
-	<div class="container">
-
-		<h2 class="heading-2">How It Work</h2>
-		<div class="border"><img src="image/border.png"></div>
-		<br>
-		<div class="col3">
-			<div class="box">
-				<i class="fa fa-hand-o-up icon-1"></i>
-			<h3>Book in just 2 Tabs</h3>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-			</div>
-		</div>
-		<div class="col3">
-			<div class="box">
-				<i class="fa fa-automobile icon-1"></i>
-			<h3>Get a Driver</h3>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-			</div>
-		</div>
-		<div class="col3">
-			<div class="box">
-				<i class="fa fa-map-o icon-1"></i>
-			<h3>Track Your Driver</h3>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-			</div>
-		</div>
-		<div class="col3">
-			<div class="box">
-				<i class="fa fa-user icon-1"></i>
-			<h3>Arrive Safely</h3>
-			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-
-	</div>
-</section>	
-
-
-<section class="sec-3">
-	<br><br>
-	<div class="container">
-		<h2 class="heading-3">About us</h2>
-		<img src="image/border.png">
-		<div class="clearfix"></div>
-		<br><br>
-		<div class="col6">
-			<p class="p3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-		
-			</p>
-			<br><br>
-			<button class="btn-r">Read More</button>
-		</div>
-		<div class="col6">
-			<img src="image/taxi-1.png" style="width: 100%; margin-top: -100px;">
-		</div>
-		<div class="clearfix"></div>
-	</div>
-</section>
-
-<section class="sec-4">
-	<div class="container">
-
-		<h2 class="heading-2">Download Carpool</h2>
-		<div class="border"><img src="image/border.png"></div>
-		<img src="image/download.png" style="float:left; padding-left: 13%;">
-		<div class="content">
-			<h2 class="heading-3">Download the Carpool mobile application</h2>
-			<br>
-			<p class="p3">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.		
-			</p>
-			<br>
-			<img src="image/button.png">
-		</div>
-		<div class="clearfix"></div>
-
-</div>
-</section>
-
-
-<section class="sec-5">
-	<div class="container">
-		<h2 class="heading-2" style="color: var(--white)">What About passenger says</h2>
-		<div class="border"><img src="image/border.png"></div>
-
-		<div class="testimonial">
-			<p class="p5">Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.		
-			</p>
-		</div>
-	</div>
-</section>
-
-<section class="map">
-	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d447986.853145337!2d76.81114849633596!3d28.692718881263545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d047309fff32f%3A0xfc5606ed1b5d46c3!2sDelhi!5e0!3m2!1sen!2sin!4v1646818342543!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-</section>
 
 <footer class="footer-distributed">
 
