@@ -38,9 +38,9 @@
                 var longitude= position.coords.longitude;
                 var location = {lat: latitude, lng: longitude};
                 map.setCenter(location);
-                marker.setPosition(location);
-                document.getElementsById('latitude').value= latitude;
-                document.getElementsById('longitude').value= longitude;
+                marker1.setPosition(location);
+                document.getElementById('latitude').value= latitude;
+                document.getElementById('longitude').value= longitude;
             });
         } else{
             alert("Geolocation API not supported in your browser");
@@ -71,7 +71,7 @@ body {
 .screen {		
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
-	height: 1000px;
+	height: 1300px;
 	width: 360px;	
 	box-shadow: 0px 0px 24px #5C5696;
 }

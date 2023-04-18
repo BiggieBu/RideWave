@@ -18,4 +18,3 @@ add functionality(a new table or in current schema) to store each users payment 
 
 
 add search feature in map
-driver form get location aint working idk why
