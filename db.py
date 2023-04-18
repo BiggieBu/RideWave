@@ -1,7 +1,6 @@
 from sqlalchemy import  create_engine,text
-#Username:	knp8plv7uhkmuo5vomzd
-#Password:	pscale_pw_lBNlxr12HHhYqxWrPDMpLod6OcVDv8q6PiR8iCGPU5a
-db_conn_str = "mysql+pymysql://knp8plv7uhkmuo5vomzd:pscale_pw_lBNlxr12HHhYqxWrPDMpLod6OcVDv8q6PiR8iCGPU5a@aws.connect.psdb.cloud/ridewave?charset=utf8mb4"
+import os
+db_conn_str = os.environ['DB_CONN_STRING']
 
 engine = create_engine(db_conn_str, connect_args={
   "ssl":{
