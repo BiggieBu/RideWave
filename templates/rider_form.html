@@ -1,4 +1,18 @@
 <head>
+  <script type="text/javascript">
+  var x= document.getElementById("map");  
+    function getlocation() {  
+        if(navigator.geolocation){  
+            navigator.geolocation.getCurrentPosition(showPosition)  
+          }  
+        else  
+        {  
+             alert("Sorry! your browser is not supporting")  
+         } }  
+       
+     function showPosition(position){  
+       var x = "Your current location is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " +    position.coords.longitude + ")";  
+                document.getElementById("map").innerHTML = x;  </script>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
@@ -197,11 +211,16 @@ body {
           <i class="login__icon fas fa-user"></i>
           <input type="text" class="login__input" name="lng" placeholder="longitude">
         </div>
+        
         <button class="button login__submit">
           <span class="button__text">PUBLISH</span>
           <i class="button__icon fas fa-chevron-right"></i>
         </button>
       </form>
+      <div id="map">
+	<button onclick="getlocation()">Get Coordinates</button>
+  
+</div>
     </div>
     <div class="screen__background">
       <span class="screen__background__shape screen__background__shape4"></span>
