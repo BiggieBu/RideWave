@@ -128,7 +128,7 @@ def loadstatus(id):
     return rows_to_list_of_dicts(result)
 def match(id,lat,lng):
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM Cluster where adminusername<>:admin "),{"admin":id})
+    result = conn.execute(text("SELECT * FROM Cluster where adminusername<>:admin and noofpassengers<=seats "),{"admin":id})
     return rows_to_list_of_dicts(result)
 
 def loadcluster_part(id):

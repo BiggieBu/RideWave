@@ -6,6 +6,7 @@ remove or add routes to currently un-used elements on the website
 instead of deleting request entry add it to accepted request / request history to show it in another tab on request status also pending requests
 **MAKE a seperate table for username,clusterid,if admin or not to facilitate deletion of user from cluster
 **adminusername and clusterid need to have a relation.
+remove cluster function
 
 //API
 update detailsitem.html to display map route 
