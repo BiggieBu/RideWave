@@ -2,11 +2,11 @@
   <div class="col-10">
     <h4 
       style="color:rgb(120,120,120); margin-bottom:4px;">
-      {{row['leavedate']}} 
-      <div>
-      {{row['leavingtime']}}
-      </div>
+      {{cluster['clusterid']}} 
     </h4>
+    <div>
+        <b>Leaving at:</b> {{cluster['leavingtime']}} <b> on</b> {{cluster['leavedate']}}
+    </div>
     <div>
       <b>Car Name:</b> {{row['carName']}}
     </div>

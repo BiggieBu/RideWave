@@ -17,7 +17,7 @@
     <button onclick="TestsFunction({{request['requestid']}})" class="btn btn-outline-primary float-right align-right" >View Location</button>
   </div>
   <div id="maps{{request['requestid']}}" style="display:none">
-  <iframe src="https://www.google.com/maps/embed/v1/place?q={{request['latitude']}},{{request['longitude']}}&zoom=17&key=AIzaSyCmqnfVJ32ifuEG0Gb5ho3yvxipmpyf0SA" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+  <iframe src="https://www.google.com/maps/embed/v1/place?q={{request['latitude']}},{{request['longitude']}}&zoom=17&key={{key}}" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
   </div>
 
   

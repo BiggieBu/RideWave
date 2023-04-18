@@ -98,12 +98,14 @@ def loadrequests(id):
 
 def requestaccepted(id,what):
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT username,clusterid FROM Requests where requestid=:val"), {"val": id})
+    result = conn.execute(text("SELECT * FROM Requests where requestid=:val"), {"val": id})
     d=row_to_dict(result)
     cid=d['clusterid']
     uname=d['username']
+    lat=d['latitude']
+    lng=d['longitude']
     if(what=='1'):
-      conn.execute(text("Update Users set clusterid=:cid where username=:uname"),{"cid":cid,"uname":uname})
+      conn.execute(text("Update Users set clusterid=:cid,lng=:lng,lat=:lat where username=:uname"),{"cid":cid,"uname":uname,"lng":lng,"lat":lat})
       conn.execute(text("Update Cluster set noofpassengers=noofpassengers+1 where clusterid=:cid"),{"cid":cid})
     conn.execute(text("delete from Requests where requestid=:rid"),{"rid":id})
   return cid  
@@ -140,3 +142,8 @@ def removemember(cid,mid):
     conn.execute(text("Update Users set clusterid=NULL where username=:mid"),{"mid":mid})
     conn.execute(text("Update Cluster set noofpassengers=noofpassengers-1 where clusterid=:cid"),{"cid":cid})
   return 0
+def delete(cid):
+  with engine.connect() as conn:
+    print(cid)
+    conn.execute(text("delete from Cluster where clusterid=:cid"),{"cid":cid})
+    conn.execute(text("Update Users set clusterid=NULL where clusterid=:cid"),{"cid":cid})

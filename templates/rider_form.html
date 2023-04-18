@@ -1,18 +1,43 @@
 <head>
-  <script type="text/javascript">
-  var x= document.getElementById("map");  
-    function getlocation() {  
-        if(navigator.geolocation){  
-            navigator.geolocation.getCurrentPosition(showPosition)  
-          }  
-        else  
-        {  
-             alert("Sorry! your browser is not supporting")  
-         } }  
-       
-     function showPosition(position){  
-       var x = "Your current location is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " +    position.coords.longitude + ")";  
-                document.getElementById("map").innerHTML = x;  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{key}}"></script>
+  <script>
+    var map;
+    var marker;
+    
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 28.749283, lng: 77.114662},
+        zoom: 15
+      });
+      
+      marker = new google.maps.Marker({
+        position: {lat: 28.749283, lng: 77.114662},
+        map: map,
+        draggable: true
+      });
+      
+      marker.addListener('dragend', function() {
+        document.getElementById('latitude').value = marker.getPosition().lat();
+        document.getElementById('longitude').value = marker.getPosition().lng();
+      });
+    }
+    
+    function getlocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position){
+                var latitude= position.coords.latitude;
+                var longitude= position.coords.longitude;
+                var location = {lat: latitude, lng: longitude};
+                map.setCenter(location);
+                marker.setPosition(location);
+                document.getElementsByName('lat')[0].value= latitude;
+                document.getElementsByName('lng')[0].value= longitude;
+            });
+        } else{
+            alert("Geolocation API not supported in your browser");
+        }
+    }
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
@@ -37,7 +62,7 @@ body {
 .screen {		
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
-	height: 500px;
+	height: 600px;
 	width: 360px;	
 	box-shadow: 0px 0px 24px #5C5696;
 }
@@ -196,38 +221,40 @@ body {
 .social-login__icon:hover {
 	transform: scale(1.5);	
 }
-    </style>
+</style>
 </head>
 <body>
-<div class="container">
-  <div class="screen">
-    <div class="screen__content">
-      <form class="login" action="/user/{{username}}/rider_form" method="post">
-        <div class="login__field">
-          <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="lat" placeholder="latitude">
-        </div>
-        <div class="login__field">
-          <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="lng" placeholder="longitude">
-        </div>
-        
-        <button class="button login__submit">
-          <span class="button__text">PUBLISH</span>
-          <i class="button__icon fas fa-chevron-right"></i>
-        </button>
-      </form>
-      <div id="map">
-	<button onclick="getlocation()">Get Coordinates</button>
-  
-</div>
-    </div>
-    <div class="screen__background">
-      <span class="screen__background__shape screen__background__shape4"></span>
-      <span class="screen__background__shape screen__background__shape3"></span>
-      <span class="screen__background__shape screen__background__shape2"></span>
-      <span class="screen__background__shape screen__background__shape1"></span>
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login" action="/user/{{username}}/rider_form" method="post">
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input type="hidden" class="login__input" id="latitude" name="lat">
+          </div>
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input type="hidden" class="login__input" id="longitude" name="lng">
+          </div>
+          <div id="map" style="height: 300px;"></div>
+          <button class="button login__submit">
+            <span class="button__text">RIDE</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>
+        </form>
+        <button class="button login__submit" onclick="getlocation()">Current Location</button>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>
     </div>
   </div>
-</div>
+  <script>
+    initMap();
+  </script>
 </body>
+
+

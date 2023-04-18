@@ -1,18 +1,52 @@
 <head>
-  <script type="text/javascript">
-  var x= document.getElementById("loc");  
-    function getlocation() {  
-        if(navigator.geolocation){  
-            navigator.geolocation.getCurrentPosition(showPosition)  
-          }  
-        else  
-        {  
-             alert("Sorry! your browser is not supporting")  
-         } }  
-       
-     function showPosition(position){  
-       var x = "Your current location is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " +    position.coords.longitude + ")";  
-                document.getElementById("loc").innerHTML = x;  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{key}}"></script>
+  <script>
+    var map;
+    var marker1;
+    var marker2;
+    
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 28.749283, lng: 77.114662},
+        zoom: 15
+      });
+      
+      marker1 = new google.maps.Marker({
+        position: {lat: 28.749283, lng: 77.114662},
+        map: map,
+        draggable: true
+      });
+      marker2 = new google.maps.Marker({
+        position: {lat: 28.749387, lng: 77.116666},
+        map: map,
+        draggable: true
+      });
+      marker1.addListener('dragend', function() {
+        document.getElementById('latitude').value = marker1.getPosition().lat();
+        document.getElementById('longitude').value = marker1.getPosition().lng();
+      });
+      marker2.addListener('dragend', function() {
+        document.getElementById('finalx').value = marker2.getPosition().lat();
+        document.getElementById('finaly').value = marker2.getPosition().lng();
+      });
+    }
+    
+    function getlocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position){
+                var latitude= position.coords.latitude;
+                var longitude= position.coords.longitude;
+                var location = {lat: latitude, lng: longitude};
+                map.setCenter(location);
+                marker.setPosition(location);
+                document.getElementsById('latitude').value= latitude;
+                document.getElementsById('longitude').value= longitude;
+            });
+        } else{
+            alert("Geolocation API not supported in your browser");
+        }
+    }
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
@@ -205,13 +239,14 @@ body {
       <form class="login" action="/user/{{username}}/driver_form" method="post">
         <div class="login__field">
           <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="initx" placeholder="current latitude">
+          <input type="text" class="login__input" id="latitude"name="initx" placeholder="current latitude">
         </div>
         <div class="login__field">
           <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="inity" placeholder="current longitude">
+          <input type="text" class="login__input" id="longitude"name="inity" placeholder="current longitude">
           
         </div>
+        <div id="map" style="height: 300px;"></div>
         <div class="login__field">
           <i class="login__icon fas fa-user"></i>
           <input type="number" class="login__input" name="cost" placeholder="charge per km">
@@ -238,20 +273,18 @@ body {
         </div>
         <div class="login__field">
           <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="finalx" placeholder="Destination latitude">
+          <input type="text" class="login__input" id='finalx'name="finalx" placeholder="Destination latitude">
         </div>
         <div class="login__field">
           <i class="login__icon fas fa-user"></i>
-          <input type="text" class="login__input" name="finaly" placeholder="Destination longitude">
+          <input type="text" class="login__input"id='finaly' name="finaly" placeholder="Destination longitude">
         </div>
         <button class="button login__submit">
           <span class="button__text">PUBLISH</span>
           <i class="button__icon fas fa-chevron-right"></i>
         </button>
       </form>
-      <div id="loc">
 	     <button onclick="getlocation()">Get Location</button>
-      </div>
       {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
       <ul class="flashes">
@@ -270,4 +303,7 @@ body {
     </div>
   </div>
 </div>
+  <script>
+    initMap();
+  </script>
 </body>
